@@ -1,0 +1,11 @@
+body {
+    background-color: rgb(25, 43, 73);
+}
+
+.logo {
+    width: 15%;
+}
+
+.card {
+    background: rgba(168, 167, 167, 0.466);
+}
