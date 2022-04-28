@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 body {
     background-color: rgb(25, 43, 73);
     color: rgb(231, 227, 218);
+    font-family: 'Poppins', sans-serif;
 }
 
 .logo {
@@ -9,4 +12,8 @@ body {
 
 .card {
     background: rgba(168, 167, 167, 0.466);
+}
+
+.blockquote-footer {
+    color: lightgray
 }

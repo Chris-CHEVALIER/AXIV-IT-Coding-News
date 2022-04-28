@@ -8,8 +8,9 @@ class Article
     private $content;
     private $imageurl;
     private $author;
+    private $created_at;
 
-    // Méthodes
+    // MÃ©thodes
     public function __construct(array $donnees)
     {
         $this->hydrate($donnees);
@@ -94,6 +95,17 @@ class Article
     public function setAuthor($author)
     {
         $this->author = $author;
+        return $this;
+    }
+
+    public function getCreated_at()
+    {
+        return $this->created_at;
+    }
+
+    public function setCreated_at($created_at)
+    {
+        $this->created_at = $created_at;
         return $this;
     }
 }

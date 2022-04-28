@@ -31,35 +31,49 @@
 
     <?php
 
-    require_once("./Article.php");
+    function loadClass(string $class)
+    {
+        require "./$class.php";
+    }
+    spl_autoload_register("loadClass");
 
-    $articleData = [
+    $articleController = new ArticleController();
+    $articles = $articleController->getAll();
+
+    /* $articleData = [
         "id" => 1,
         "title" => "Bienvenue sur le second live AXIV IT Group",
         "content" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "imageurl" => "https://i.ytimg.com/vi/2nP4ya4FVO0/maxresdefault.jpg",
         "author" => "Chris Chevalier"
-    ];
+    ]; */
 
-    $article = new Article($articleData);
+    // $article = new Article($articleData);
 
-    $title = "Mon super article";
+    // $title = "Mon super article";
     ?>
 
     <div class="container">
         <div class="d-flex justify-content-center">
-            <img src="./images/logo.png" alt="Logo" class="logo">
+            <img src="./images/logo.png" alt="Logo" class="logo mt-3">
         </div>
 
-        <div class="card" style="width: 18rem;">
-            <img src="<?= $article->getImageurl() ?>" class="card-img-top" alt="<?= $article->getTitle() ?>">
-            <div class="card-body">
-                <h5 class="card-title"><?= $article->getTitle() ?></h5>
-                <p class="card-text"><?= $article->getContent() ?></p>
-                <a href="#" class="btn btn-warning">Modifier</a>
-                <a href="#" class="btn btn-danger">Supprimer</a>
-            </div>
-        </div>
+        <main class="d-flex justify-content-center flex-wrap">
+            <?php
+            foreach ($articles as $article) : ?>
+                <div class="card m-3" style="width: 18rem;">
+                    <img src="<?= $article->getImageurl() ?>" class="card-img-top" alt="<?= $article->getTitle() ?>">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $article->getTitle() ?></h5>
+                        <p class="card-text"><?= $article->getContent() ?></p>
+                        <footer class="blockquote-footer">Écrit par <?= $article->getAuthor() ?></footer>
+                        <a href="#" class="btn btn-info">Lire</a>
+                        <a href="#" class="btn btn-warning">Modifier</a>
+                        <a href="#" class="btn btn-danger">Supprimer</a>
+                    </div>
+                </div>
+            <?php endforeach ?>
+        </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
