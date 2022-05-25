@@ -41,12 +41,12 @@ class Article
         }
     }
 
-    public function getId() // Getter
+    public function getId(): int // Getter
     {
         return $this->id;
     }
 
-    public function setId(int $id) // Setter
+    public function setId(int $id): self // Setter
     {
         if ($id > 0) {
             $this->id = $id;
@@ -54,18 +54,20 @@ class Article
         }
     }
 
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    public function setTitle(string $title)
+    public function setTitle(string $title): self
     {
-        $this->title = $title;
-        return $this;
+        if (strlen($title) > 3 || strlen($title) < 120) {
+            $this->title = $title;
+            return $this;
+        }
     }
 
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -76,7 +78,7 @@ class Article
         return $this;
     }
 
-    public function getImageurl()
+    public function getImageurl(): string
     {
         return $this->imageurl;
     }
@@ -109,3 +111,6 @@ class Article
         return $this;
     }
 }
+
+/* $monSuperArticle = new Article(["id" => 1, "title" => "Test"]);
+$monSuperArticle->setTitle("sdjkbcn")->setContent("dsjdkn,"); */

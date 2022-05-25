@@ -25,30 +25,44 @@ class ArticleController
 
     public function create(Article $article)
     {
-        $req = $this->pdo->prepare("INSERT INTO `article` (title, content, imageurl, author, created_at) VALUES (:title, :content, :imageurl, :author, :created_at)");
+        $req = $this->pdo->prepare("INSERT INTO `article` (title, content, imageurl, author, created_at) VALUES (:title, :content, :imageurl, :author, NOW())");
 
         $req->bindValue(":title", $article->getTitle(), PDO::PARAM_STR);
         $req->bindValue(":content", $article->getContent(), PDO::PARAM_STR);
         $req->bindValue(":imageurl", $article->getImageurl(), PDO::PARAM_STR);
         $req->bindValue(":author", $article->getAuthor(), PDO::PARAM_STR);
-        $req->bindValue(":created_at", date("Y-m-d H:i:s"), PDO::PARAM_STR);
 
         $req->execute();
     }
 
     public function update(Article $article)
     {
-        # code...
+        $req = $this->pdo->prepare("UPDATE `article` SET title = :title, content = :content, imageurl = :imageurl, author = :author, created_at = NOW() WHERE id = :id");
+
+        $req->bindValue(":title", $article->getTitle(), PDO::PARAM_STR);
+        $req->bindValue(":content", $article->getContent(), PDO::PARAM_STR);
+        $req->bindValue(":imageurl", $article->getImageurl(), PDO::PARAM_STR);
+        $req->bindValue(":author", $article->getAuthor(), PDO::PARAM_STR);
+        $req->bindValue(":id", $article->getId(), PDO::PARAM_INT);
+
+        $req->execute();
     }
 
     public function delete(int $id)
     {
-        # code...
+        $req = $this->pdo->prepare("DELETE FROM `article` WHERE id = :id");
+        $req->bindValue(":id", $id, PDO::PARAM_INT);
+        $req->execute();
     }
 
     public function get(int $id)
     {
-        # code...
+        $req = $this->pdo->prepare("SELECT * FROM `article` WHERE id = :id");
+        $req->bindValue(":id", $id, PDO::PARAM_INT);
+        $req->execute();
+        $data = $req->fetch();
+        $article = new Article($data);
+        return $article;
     }
 
     public function getAll()

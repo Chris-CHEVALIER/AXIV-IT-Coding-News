@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="./styles/main.css">
     <title>Coding News</title>
 </head>
@@ -33,7 +34,11 @@
 
     function loadClass(string $class)
     {
-        require "./$class.php";
+        if (str_contains($class, "Controller")) {
+            require "./controller/$class.php";
+        } else {
+            require "./entities/$class.php";
+        }
     }
     spl_autoload_register("loadClass");
 
@@ -67,9 +72,9 @@
                         <h5 class="card-title"><?= $article->getTitle() ?></h5>
                         <p class="card-text"><?= $article->getContent() ?></p>
                         <footer class="blockquote-footer">Écrit par <?= $article->getAuthor() ?></footer>
-                        <a href="#" class="btn btn-info">Lire</a>
-                        <a href="#" class="btn btn-warning">Modifier</a>
-                        <a href="#" class="btn btn-danger">Supprimer</a>
+                        <a href="#" class="btn btn-info"><i class="bi bi-eye"></i></a>
+                        <a href="./views/edit.php?id=<?= $article->getId() ?>" class="btn btn-warning"><i class="bi bi-pen"></i></a>
+                        <a href="./views/delete.php?id=<?= $article->getId() ?>" class="btn btn-danger"><i class="bi bi-trash"></i></a>
                     </div>
                 </div>
             <?php endforeach ?>
