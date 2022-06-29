@@ -3,9 +3,9 @@
 function loadClass(string $class)
 {
     if (str_contains($class, "Controller")) {
-        require "../controller/$class.php";
+        require "../Controller/$class.php";
     } else {
-        require "../entities/$class.php";
+        require "../Entity/$class.php";
     }
 }
 spl_autoload_register("loadClass");

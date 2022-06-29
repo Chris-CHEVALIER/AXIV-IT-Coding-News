@@ -17,7 +17,7 @@ class ArticleController
         }
     }
 
-    public function setPdo($pdo)
+    public function setPdo(PDO $pdo)
     {
         $this->pdo = $pdo;
         return $this;
